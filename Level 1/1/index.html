@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="fede"> <!-- el nombre del modulo y se bindea al controller-->
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <!--<script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>-->
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body ng-controller="StoreController">
+    <h1>{{message}}</h1>
+    <div ng-repeat="p in gems">
+	    <div ng-hide="p.sold_out">
+			<h3>{{p.name}}</h3>
+		    <em>{{p.price}}</em>
+			<div ng-show="p.can_purchase"><input type='button' value='Add to cart'/></div>
+		</div>
+	</div>
+  </body>
+</html>

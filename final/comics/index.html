@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </head>
+  <body ng-controller="MainController">
+    <div ng-show="logueado">
+      Esta logueado
+    </div>
+    <div ng-show="!logueado">
+      <form>
+        <input type="text" placeholder="usuario" />
+        <input type="password" placeholder="clave" />
+        <input type="button" value="Ingresar" ng-click="login();"/>
+      </form>
+    </div>
+  </body>
+</html>
+
+

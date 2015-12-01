@@ -1,0 +1,36 @@
+User stories requeridas:
+1 requerido
+2 requerido
+3 el sistema debe verificar e identificar a un administrador
+4 implementar un header
+5 implementar footer con elementos estáticos
+6 sidebar es necesario y al menos una de las 3 funciones tiene que estar funcional
+7 no necesitan ser todas las tabs funcionales pero tieen que figurar todas
+8 debe verse un search pero no necesita estar implementado
+9 no necesita estar implementado o realizado en lo más mínimo
+10 los 2 primeros elementos son necesarios. tengo que poder ver el contneido de mi cuenta y quien soy
+
+
+
+
+
+
+1 y 2 requeridas. (register + login)
+3. tmb (mostrar alguna diferencia en elementos visuales)
+
+Pagina principal: (4 - 7)
+4. si.
+5. No hace falta que los elementos sean funcionales (footer estático)
+6. Si. Al menos una de las informaciones.
+7. una de las opciones funcional.
+
+
+8. Solo visualmente. No hace falta que este la funcionalidad implementada.
+9. No tiene que estar implementada.
+10. Solamente los 2 primeros items
+11. No.
+12. No requerido.
+13. No.
+
+
+

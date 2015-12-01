@@ -1,0 +1,12 @@
+localstorage sessionstorage (propiedad asociada a un valor que va a ser un string)
+desde configuracion de chrome puedo permitir cookies e informacón local
+para guardar el objeto en localstorage tengo que mapearlo a un string con JSON.stringify(x) y despues asignarlo
+reconvierto un string a objeto con JSON.parse()
+localstorage funciona a nivel url, no a nivel página
+para agregar al array tengo ue traerlo parseandolo, pusheando el nuevo y stringificandolo de nuevo y pasarlo al localstorage de nuevo
+closure es una propiedad de valores encapsulados en un scope. permite que funciones anidadas puedan seguirse ejecutando
+metodos privilegiados: permiten accedder a contenido oculto
+
+
+
+

@@ -1,0 +1,6 @@
+.reviewForm.ng-invalid, .reviewForm.ng-dirty{
+	border-color: red;
+}
+.reviewForm.ng-valid, .reviewForm.ng-dirty{
+	border-color: green;
+}

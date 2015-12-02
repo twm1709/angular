@@ -48,13 +48,13 @@
           <!--  Review Tab's Content  -->
           <div ng-show="tab.isSet(3)">
             <!--  Product Reviews List -->
-            <ul>
-              <h4>Reviews</h4>
+            <h4>Reviews</h4>
+            <ul ng-repeat = "review in product.reviews">
               <li>
                 <blockquote>
-                  <strong> Stars</strong>
-                  
-                  <cite class="clearfix">—</cite>
+                  <strong> Stars: {{review.stars}}</strong>
+                  <p>{{review.body}}</p>
+                  <cite class="clearfix">{{review.author}}</cite>
                 </blockquote>
               </li>
             </ul>

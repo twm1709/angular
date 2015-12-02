@@ -5,17 +5,49 @@
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
   </head>
-  <body ng-controller="MainController">
+  <body ng-controller="MainController" >
+    {{message}}
     <div ng-show="logueado">
-      Esta logueado
+      Bienvenido {{usuario_nombre}}
+      <div id="pantalla principal">
+        <div id="barra_lateral"></div>
+        <div id="header"></div>
+        <div id="footer"></div>
+        <div id="tabs"></div>
+        <div id="search"></div>
+      </div>
+
+      <div id="account_info"></div>
+
     </div>
     <div ng-show="!logueado">
-      <form>
-        <input type="text" placeholder="usuario" />
-        <input type="password" placeholder="clave" />
-        <input type="button" value="Ingresar" ng-click="login();"/>
-      </form>
+      <div id="login" ng-show="!registrar" ng-controller = "LoginController">
+        {{message}}
+        <form name="loginForm" ng-submit="login()">
+          <input type="text" placeholder="usuario" ng-model="user_input" required/>
+          <input type="password" placeholder="clave" ng-model="clave_input" required/>
+          <input type="submit" value="Ingresar" />
+          <a href="" ng-click="nuevoUsuario()">Registrarse</a>
+        </form>
+      </div>
+
+      <div id="register" ng-show = "registrar" ng-controller = "RegisterController">
+        <form name="registerForm" ng-submit="register()">
+          <input type="text" placeholder="nombre" ngm-model="nombre_input" required/>
+          <input type="text" placeholder="usuario" ng-model="user_input" required/>
+          <input type="password" placeholder="clave" ng-model="clave_input" required/>
+          <input type="password" placeholder="Confirmar clave" ng-model="clave2_input" required/>
+          <input type="submit" value="Ingresar" />
+        </form>
+      </div>
+
+
     </div>
+
+
+
+    
+
   </body>
 </html>
 

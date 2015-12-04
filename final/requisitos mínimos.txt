@@ -21,6 +21,7 @@ User stories requeridas:
 Pagina principal: (4 - 7)
 4. si.
 5. No hace falta que los elementos sean funcionales (footer estático)
+
 6. Si. Al menos una de las informaciones.
 7. una de las opciones funcional.
 

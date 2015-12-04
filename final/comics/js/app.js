@@ -1,18 +1,20 @@
 (function() {
   var app = angular.module('app', []);
   
+  //Datos de la base
   var usuarios = [
-  					{nombre: 'juan', user: 'admin', password: 'admin0', admin: 1}, 
-  					{nombre: 'pedro', user: 'user', password: '123', admin: 1}
+  					{nombre: 'juan', apellido: 'gomez', user: 'admin', password: 'admin0', admin: 1}, 
+  					{nombre: 'pedro', apellido: 'ruiz', user: 'user', password: '123', admin: 0}
 				];
 
   var comics = [
-            {nombre: 'Amazing Fantasy', numero: 15, genero: 'Super-Heroes', creador: ['Stan Lee', 'Steve Ditko'], img: "img/comics/Amazing_Fantasy_Vol_1_15.jpg", cal: 4}, 
-            {nombre: 'Action Comics', numero: 1, genero: 'Super-Heroes', creador: ['Jerry Siegel', 'Joe Schuster'], img: "img/comics/Action_Comics_1.jpg", cal: 3},
-            {nombre: 'Amazing Spider-Man', numero: 33, genero: 'Super-Heroes', creador: ['Stan Lee', 'Steve Ditko'], img: "img/comics/Amazing_Spider-Man_Vol_1_33.jpg", cal: 3},
-            {nombre: 'Detective Comics', numero: 27, genero: 'Super-Heroes', creador: ['Bill Finger', 'Bob Kane'], img: "img/comics/detective-comics27.jpg", cal: 5},
-            {nombre: 'Tomb Of Dracula', numero: 1, genero: 'Terror', creador: ['Bram Stoker'], img: "img/comics/tomb_of_dracula.jpg", cal: 2}
+            {nombre: 'Amazing Fantasy', numero: 15, genero: 'Super-Heroes', creador: ['Stan Lee', 'Steve Ditko'], img: "img/comics/Amazing_Fantasy_Vol_1_15.jpg", cal: 4, views: 10}, 
+            {nombre: 'Action Comics', numero: 1, genero: 'Super-Heroes', creador: ['Jerry Siegel', 'Joe Schuster'], img: "img/comics/Action_Comics_1.jpg", cal: 3, views: 5},
+            {nombre: 'Amazing Spider-Man', numero: 33, genero: 'Super-Heroes', creador: ['Stan Lee', 'Steve Ditko'], img: "img/comics/Amazing_Spider-Man_Vol_1_33.jpg", cal: 3, views: 1},
+            {nombre: 'Detective Comics', numero: 27, genero: 'Super-Heroes', creador: ['Bill Finger', 'Bob Kane'], img: "img/comics/detective-comics27.jpg", cal: 5, views: 15},
+            {nombre: 'Tomb Of Dracula', numero: 1, genero: 'Terror', creador: ['Bram Stoker'], img: "img/comics/tomb_of_dracula.jpg", cal: 2, views: 3}
         ];
+
 
   var crearBase = function(){
       if (!localStorage.usuarios){
@@ -22,6 +24,7 @@
   };
   crearBase();
 
+  //Servicios
   var verificarUsuario = function(){
 
     if (!sessionStorage.usuario){
@@ -39,17 +42,24 @@
   app.value('usuario', verificarUsuario());
   app.value('comics', obtenerComics());
   
+
+  //Filtros
+  angular.module('app').filter('stars', function() {
+                              return function(cant) {
+                                var aux = "";
+                                for (i = 0; i < cant; i++)
+                                  aux += "<img src='img/interface/stars.png'/>";
+                                
+                                aux = "Rating: " + cant;
+                                return aux;
+                              };
+                            });
+  //Controladores
   app.controller('MainController', function($scope, $rootScope, usuario){
     $rootScope.logueado = usuario.logueado;
-    /*
-    $scope.usuarioActivo = usuario.info;
-    $scope.usuario_nombre = $scope.usuarioActivo.nombre;
-    */
     $rootScope.usuarioActivo = usuario.info;
     if ($rootScope.usuarioActivo)
       $scope.usuario_nombre = $rootScope.usuarioActivo.nombre;
-    
-
     $scope.logout = function(){
       sessionStorage.clear();
       $rootScope.logueado = false;
@@ -70,7 +80,6 @@
 
     $scope.volver = function(){
       $rootScope.registrar = !$rootScope.registrar;
-      
     };
 
     $scope.crearUsuario = function(){

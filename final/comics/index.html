@@ -22,14 +22,11 @@
     <div id="pantalla_principal" ng-show="logueado">
       <div id="header">
         <div style="float:right; width:100%;">
-          <div id="search">
-            <input type="text" placeholder="Buscar en el Sitio"/>
-            <a href=""><img src="img/interface/search.jpg" class="icon"/></a>
-          </div>
-
           <div id="user_area">
             Welcome {{usuarioActivo.nombre}}
             <a href=""><img src="img/interface/user.jpg" class="icon"/></a>
+            
+            <strong ng-show="usuarioActivo.admin">ADMIN</strong>
             <a href="" ng-click="logout()">Logout</a>
           </div>
         </div>
@@ -43,7 +40,7 @@
           <div id="tabs" align="right">
               <div id='hormenu'>
                 <ul>
-                  <li class='active'><a href='#'>Home</a></li>
+                  <li class='active'><a href='#'>Main</a></li>
                   <li><a href='#'>Genres</a></li>
                   <li><a href='#'>Editions</a></li>
                   <li><a href='#'>News</a></li>
@@ -59,12 +56,30 @@
                 <li><a href='#'>Qualifications</a></li>
                 <li><a href='#'>Top Searches</a></li>
                 <li><a href='#'>Recommended</a></li>
+                <li><a href='#'>Advanced Search</a></li>
               </ul>
           </div>
+          <!--
+          <div id="search">
+            <input type="text" placeholder="Find in Site" style='width:70%'/>
+            <a href=""><img src="img/interface/search.jpg" class="icon"/></a>
+          </div>
+        -->
         </div>
-        <div id="main_content" ng-repeat="comic in comics">
-          {{comic.nombre}} #{{comic.numero}}
+        <div id="main_content" >
+
+          <ul class="list-inline thumbs">
+            <li class="thumbnail" ng-repeat="comic in comics | orderBy: 'cal'">
+              {{comic.nombre | uppercase}} #{{comic.numero}} <br>
+              <img ng-src="{{comic.img}}" class="cover"/><br>
+              <strong ng-bind="{{comic.cal}} | stars" align="center"></strong>
+            </li>
+          </ul>
+          <div id ="comic_info">
+
+          </div>
         </div>
+        
       </div>
       <div id="footer" align="center">
         <table id="table_footer"><tr align="center">

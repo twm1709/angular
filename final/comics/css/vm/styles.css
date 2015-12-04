@@ -41,7 +41,9 @@
   transition: color .2s ease;
 }
 #vermenu > ul > li > a:hover {
-  color: #d8f3f0;
+  color: #3ab4a6;
+  background: #ffffff;
+  border: solid 2px #3ab4a6;
 }
 #vermenu ul > li.has-sub > a:after {
   position: absolute;

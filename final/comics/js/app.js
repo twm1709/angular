@@ -1,188 +1,7 @@
 (function() {
-  var app = angular.module('app', []);
+  var app = angular.module('app', ['ngRoute','comics-directives', 'comics-services', 'comics-filters', 'comics-routes']);
   
-  var createDB = function(){
-      if (!localStorage.users){
-        localStorage.users = JSON.stringify(usuarios);
-        localStorage.comics = JSON.stringify(comics);
-        localStorage.genres = JSON.stringify(genres);
-      }
-  };
-  createDB();
-
-  //Servicios
-  var getUser = function(){
-
-    if (!sessionStorage.usuario){
-        return {logueado: false, info: ""};
-      }
-      else{
-        return {logueado: true, info: JSON.parse(sessionStorage.usuario)};
-      }
-  };
-
-  var getComics= function(){
-    return JSON.parse(localStorage.comics);
-  };
-
-  var getGenres= function(){
-    return JSON.parse(localStorage.genres);
-  };
-
-  app.value('usuario', getUser());
-  app.value('comics', getComics());
-  app.value('genres', getGenres());
-
-  var createDB = function(){
-      if (!localStorage.users){
-        localStorage.users = JSON.stringify(usuarios);
-        localStorage.comics = JSON.stringify(comics);
-        localStorage.genres = JSON.stringify(genres);
-      }
-  };
-  createDB();
-
-  app.controller('MainController', function($scope, $rootScope, usuario){
-    $rootScope.logueado = usuario.logueado;
-    $rootScope.usuarioActivo = usuario.info;
-    if ($rootScope.usuarioActivo)
-      $scope.usuario_nombre = $rootScope.usuarioActivo.nombre;
-    $scope.logout = function(){
-      sessionStorage.clear();
-      $rootScope.logueado = false;
-    };
-
-  });
-
-  app.controller('ComicsController', function($scope, comics, genres, orderByFilter){
-    $scope.comics = comics;
-    $scope.viewGenres = false;
-    $scope.viewComics = true;
-    $scope.viewInfo = false;
-    $scope.genres = genres;
-    $scope.getStarArray= function(stars){
-      return new Array(stars);
-    };
-
-    $scope.predicate = 'name';
-    $scope.reverse = false;
-    $scope.order = function(predicate) {
-      $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-      $scope.predicate = predicate;
-    };
-    
-    $scope.selected_genre = "";
-    $scope.getGenre = function(){
-      return $scope.selected_genre;
-    };
-
-    $scope.setGenre= function(genre){
-      $scope.selected_genre = genre;
-      $scope.viewComics = true;
-      $scope.viewGenres = false;
-    }
-    $scope.listGenres = function(){
-      $scope.viewGenres = true;
-      $scope.viewComics = false;
-    }
-    $scope.mainTab = function(){
-      showList();
-      $scope.setGenre('');
-    }
-    $scope.showList = function(){
-      $scope.viewGenres = false; 
-      $scope.viewComics = true;
-      $scope.viewInfo = false;
-    }
-    $scope.getReverse = function(){
-      if (!$scope.reverse)
-        return 'Ascending';
-      else
-        return 'Descending';
-
-    };
-    $scope.setSelectedComic = function(comic){
-      $scope.selectedComic = comic;
-      $scope.viewInfo = true;
-      $scope.viewComics = false;
-      $scope.viewGenres = false;
-    };
-
-    $scope.getComicName = function(){
-      return $scope.selectedComic.name;
-    }
-
-
-
-  });
-
-  app.controller('TabController', function(){
-    this.tab = 1;
-
-    this.setTab = function(newValue){
-      this.tab = newValue;
-    };
-
-    this.isSet = function(tabName){
-      return this.tab === tabName;
-    };
-  });
-
-  
-  
-
-  //Filtros
-  app.filter('stars', 
-      function() {
-        return function(cant) {
-          var aux = "";
-          for (i = 0; i < cant; i++)
-            aux += "<img src='img/interface/stars.png'/>";
-          
-          aux = "Rating: " + cant;
-          return aux;
-        };
-      });
-  
-  //Directives
-  app.directive('contentArea', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/interface/content-area.html"
-    };
-  });
-  app.directive('genreList', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/comics/genre-list.html"
-    };
-  });
-  app.directive('comicInfo', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/comics/comic-info.html"
-    };
-  });
-
-  app.directive('comicsList', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/comics/comics-list.html"
-    };
-  });
-
-  app.directive('sidebarTabsArea', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/interface/sidebar-tabs.html"
-    };
-  });
-
-  app.directive('loginArea', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/users/login-area.html",
-      controller: function($scope,$rootScope, usuario){
+  app.controller('LoginController', function($scope,$rootScope, usuario){
                     $scope.message = "";    
                     $rootScope.logueado = usuario.logueado;
                     $rootScope.registrar = false;
@@ -216,31 +35,9 @@
                       $scope.clave_input = "";
                     };
 
-                  },
-      controllerAs: 'login'
-      
-    };
   });
 
-  app.directive('footerArea', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/interface/footer-area.html"
-    };
-  });
-
-  app.directive('headerArea', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/interface/header-area.html"
-    };
-  });
-
-  app.directive('registerArea', function(){
-    return{
-      restrict: 'E',
-      templateUrl: "views/users/register-area.html",
-      controller: function($scope, $rootScope, usuario){
+  app.controller('RegisterController', function($scope, $rootScope, usuario){
           $scope.user_input = "";
           $scope.clave_input = "";
           $scope.nombre_input = "";
@@ -277,8 +74,143 @@
 
           };
 
-        }
-    }
   });
+
+  app.controller('MainController', function($scope, $rootScope, usuario){
+    $rootScope.logueado = usuario.logueado;
+    $rootScope.usuarioActivo = usuario.info;
+    $scope.viewUserProfile = false;
+    $scope.viewComics = true;
+    
+    if ($rootScope.usuarioActivo)
+      $scope.usuario_nombre = $rootScope.usuarioActivo.nombre;
+    
+    var createDB = function(){
+      if (!localStorage.users){
+        localStorage.users = JSON.stringify(usuarios);
+        localStorage.comics = JSON.stringify(comics);
+        localStorage.genres = JSON.stringify(genres);
+        localStorage.characters = JSON.stringify(characters);
+      }
+      alert('wei');
+    };
+    
+    $scope.logout = function(){
+      sessionStorage.clear();
+      $rootScope.logueado = false;
+    };
+
+    $scope.isAuthorized = function(){
+      if ($rootScope.usuarioActivo.admin == 1)
+        return true;
+      else
+        return false;
+    };
+    
+    
+    $scope.goToProfile = function(){
+      $scope.viewUserProfile = true;
+      $scope.viewComics = false;
+    };
+
+    $scope.goToComics = function(){
+      $scope.viewUserProfile = false;
+      $scope.viewComics = true;
+    };
+
+  });
+
+  app.controller('ComicsController', function($scope, comics, genres, characters, orderByFilter){
+    $scope.comics = comics;
+    $scope.viewAdvancedSearch = false;
+    $scope.viewUserProfile = false;
+    $scope.viewGenres = false;
+    $scope.viewComicList = true;
+    $scope.viewInfo = false;
+    $scope.genres = genres;
+    $scope.getStarArray= function(stars){
+      return new Array(stars);
+    };
+
+    $scope.predicate = 'name';
+    $scope.reverse = false;
+    $scope.order = function(predicate) {
+      $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+      $scope.predicate = predicate;
+    };
+    
+    $scope.selected_genre = "";
+    $scope.getGenre = function(){
+      return $scope.selected_genre;
+    };
+
+    $scope.setGenre= function(genre){
+      $scope.selected_genre = genre;
+      $scope.viewComicList = true;
+      $scope.viewGenres = false;
+      $scope.viewAdvancedSearch = false;
+      $scope.viewInfo = false;
+    }
+    $scope.listGenres = function(){
+      $scope.viewGenres = true;
+      $scope.viewComicList = false;
+      $scope.viewInfo = false;
+      $scope.viewAdvancedSearch = false;
+    }
+    $scope.mainTab = function(){
+      $scope.showList();
+      $scope.setGenre('');
+    }
+    $scope.showList = function(){
+      $scope.viewGenres = false; 
+      $scope.viewComicList = true;
+      $scope.viewInfo = false;
+      $scope.viewAdvancedSearch = false;
+    }
+    $scope.getReverse = function(){
+      if (!$scope.reverse)
+        return 'Ascending';
+      else
+        return 'Descending';
+
+    };
+    $scope.setSelectedComic = function(comic){
+      $scope.selectedComic = comic;
+      $scope.viewInfo = true;
+      $scope.viewComicList = false;
+      $scope.viewGenres = false;
+      $scope.viewAdvancedSearch = false;
+      $scope.selectedComic.views++;
+    };
+
+    $scope.getComicName = function(){
+      return $scope.selectedComic.name;
+    };
+
+    $scope.showAdvancedSearch = function(){
+      $scope.viewInfo = false;
+      $scope.viewComicList = false;
+      $scope.viewGenres = false;
+      $scope.viewAdvancedSearch = true;
+    };
+
+    $scope.listCharacters = function(){
+
+    };
+
+  });
+
+  app.controller('TabController', function(){
+    this.tab = 1;
+
+    this.setTab = function(newValue){
+      this.tab = newValue;
+    };
+
+    this.isSet = function(tabName){
+      return this.tab === tabName;
+    };
+  });
+  
 
 })();

@@ -1,4 +1,4 @@
-<div id="login" ng-show="!registrar">
+<div id="login" ng-show="!registrar" ng-controller='LoginController'>
     {{message}}
     <form name="loginForm" ng-submit="login()">
       <input type="text" placeholder="usuario" ng-model="user_input" required/>

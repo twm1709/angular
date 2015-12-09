@@ -4,17 +4,17 @@
   </div>
   <div style="float:left; width:50%;">
     <div id="user_area">
-      Welcome {{usuarioActivo.nombre}}
-      <a href=""><img src="img/interface/user.jpg" class="icon"/></a>
-      
-      <strong ng-show="usuarioActivo.admin">ADMIN</strong>
       
       <div class="dropdown">
+        <span id='user_welcome'>Welcome {{usuarioActivo.nombre}}</span>
+
+        <a href=""><img src="img/interface/user.jpg" class="icon"/></a>
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img class='icon' src="img/interface/gear.png" id="dagger" /></button>
         <ul class="dropdown-menu">
-          <li><a href="" ng-click="logout()">Logout</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
+          <li><a href="" ng-show="isAuthorized()">EDIT COMICS</a></li>
+          <li><a href="" ng-show="isAuthorized()">EDIT USERS</a></li>
+          <li><a href="" ng-click="goToProfile()">MY PROFILE</a></li>
+          <li><a href="" ng-click="logout()">LOGOUT</a></li>
         </ul>
       </div>
       

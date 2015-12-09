@@ -23,7 +23,9 @@ html,body { height:100%; }
 	min-height:100%;
 	position:relative;
 }
-
+#user_welcome{
+	color: white;
+}
 
 .star{
 	width:18px;
@@ -53,6 +55,7 @@ html,body { height:100%; }
 #title{
 	font-family: 'Comica';
 	font-size: 30px;
+	color: white;
 }
 #search{
 	float:left;

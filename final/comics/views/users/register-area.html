@@ -1,5 +1,4 @@
-<div id="register" ng-show = "registrar">
-	{{message}}
+<div id="register" ng-show = "registrar" ng-controller="RegisterController">
 	<form name="registerForm" ng-submit="crearUsuario()">
 	  <input type="text" placeholder="nombre" ng-model="nombre_input" required/>
 	  <input type="text" placeholder="usuario" ng-model="user_input" required/>

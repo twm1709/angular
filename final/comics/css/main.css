@@ -1,17 +1,22 @@
+html,body { height:100%; }
 .banner{
-	width:50%;
-}
-#tabs{
-	width:82%;
-	float:right;
+	width:100%;
 }
 #header_banner{
 	width:100%;
 	float:left;
 }
-#sidebar{
-	width:18%;
+
+#tabs{
+	width:82%;
 	float:left;
+	margin-left:220px;
+}
+
+#sidebar{
+	width:250px;
+	float:left;
+	height: 100%;
 }
 
 #pantalla_principal {
@@ -19,19 +24,36 @@
 	position:relative;
 }
 
-#footer{
-	clear: both;
-    position: relative;
-    z-index: 10;
-    height: 3em;
-    margin-top: -3em;
-	background:#3ab4a6;
+
+.star{
+	width:18px;
+}
+.img_big{
+	width:250px;
+}
+.comic_table{
+	width:500px;
+	margin-top: 100px;
 }
 #table_footer{
 	width:30%;
 
 }
 
+#comic_header{
+	font-style: solid 20px #ffffff;
+
+}
+
+@font-face {
+    font-family: 'Comica'; /*a name to be used later*/
+    src: url('fonts/Comica.ttf'); /*URL to font*/
+}
+
+#title{
+	font-family: 'Comica';
+	font-size: 30px;
+}
 #search{
 	float:left;
 	position:relative;
@@ -41,7 +63,7 @@
 #user_area{
 	float:right;
 	position:relative;
-	width:20%;
+	
 }
 
 #footer2 {
@@ -54,8 +76,8 @@
 	
 }
 #main_content{
-	float:left;
-	width:82%;
+	margin-left:250px;
+
 }
 
 .icon{
